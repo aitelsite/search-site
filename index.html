@@ -1,3 +1,210 @@
-<script async src="https://cse.google.com/cse.js?cx=62cb0ff9308e34e11">
-</script>
-<div class="gcse-search"></div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tractor Live | مرکز پایش اخبار تراکتور</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --tractor-red: #e60000;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --text-gold: #c5a059;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* هدر حماسی */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.tractor-pfc.com/images/bg.jpg'); /* آدرس تصویر پس‌زمینه در صورت تمایل عوض شود */
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 4px solid var(--tractor-red);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .live-badge {
+            background: var(--tractor-red);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0.5; } }
+
+        /* نوار پلتفرم‌ها (Dock) */
+        .platform-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: -30px auto 30px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .nav-item {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            padding: 12px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--tractor-red);
+            border-color: var(--tractor-red);
+            transform: translateY(-5px);
+        }
+
+        /* کادر جستجوی اختصاصی */
+        .search-section {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .custom-search {
+            background: var(--card-bg);
+            border-radius: 50px;
+            padding: 10px 25px;
+            display: flex;
+            border: 1px solid #222;
+        }
+
+        .custom-search input {
+            background: transparent;
+            border: none;
+            color: white;
+            flex: 1;
+            padding: 10px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        /* استایل نتایج گوگل */
+        .results-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gsc-control-cse {
+            background: transparent !important;
+            border: none !important;
+        }
+
+        .gs-result {
+            background: var(--card-bg) !important;
+            border: 1px solid #222 !important;
+            border-radius: 15px !important;
+            padding: 20px !important;
+            margin-bottom: 20px !important;
+            transition: 0.3s;
+        }
+
+        .gs-result:hover {
+            border-color: var(--tractor-red) !important;
+        }
+
+        .gs-title, .gs-title * {
+            color: var(--tractor-red) !important;
+            font-size: 1.3rem !important;
+            text-decoration: none !important;
+        }
+
+        .gs-snippet {
+            color: #ccc !important;
+            margin-top: 10px !important;
+        }
+
+        /* مخفی کردن المان‌های اضافه گوگل */
+        .gsc-search-box, .gsc-adBlock { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <span class="live-badge">پایش زنده محتوا</span>
+        <h1>تراکتور نیوز</h1>
+        <p>آخرین اخبار، ویدیوها و فعالیت‌های تیم محبوب آذربایجان</p>
+    </section>
+
+    <div class="platform-nav">
+        <div class="nav-item active" onclick="filterSearch(this, 'Web')"><i class="fas fa-newspaper"></i> وب</div>
+        <div class="nav-item" onclick="filterSearch(this, 'YouTube')"><i class="fab fa-youtube"></i> ویدیو</div>
+        <div class="nav-item" onclick="filterSearch(this, 'Telegram')"><i class="fab fa-telegram"></i> تلگرام</div>
+        <div class="nav-item" onclick="filterSearch(this, 'Instagram')"><i class="fab fa-instagram"></i> اینستاگرام</div>
+    </div>
+
+    <div class="search-section">
+        <div class="custom-search">
+            <input type="text" id="searchInput" placeholder="جستجو در محتوای تراکتور..." onkeypress="handleEnter(event)">
+            <button onclick="executeSearch()" style="background:none; border:none; color:var(--tractor-red); cursor:pointer;">
+                <i class="fas fa-search fa-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="results-container">
+        <!-- کد گوگل با قابلیت مرتب‌سازی بر اساس تاریخ (Sort by Date) -->
+        <script async src="https://cse.google.com/cse.js?cx=62cb0ff9308e34e11"></script>
+        <div class="gcse-searchresults-only" data-sort_by="date"></div>
+    </div>
+
+    <script>
+        // اجرای خودکار جستجو هنگام لود صفحه
+        window.onload = function() {
+            setTimeout(() => {
+                const query = "آخرین اخبار تراکتور";
+                executeSearch(query);
+            }, 1000);
+        };
+
+        function executeSearch(query = null) {
+            const q = query || document.getElementById('searchInput').value || "تراکتور";
+            const element = google.search.cse.element.getElement('default');
+            element.execute(q);
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') executeSearch();
+        }
+
+        function filterSearch(el, type) {
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+
+            const googleTabs = document.querySelectorAll('.gsc-tabHeader');
+            googleTabs.forEach(gt => {
+                if (gt.innerText.toLowerCase().includes(type.toLowerCase())) {
+                    gt.click();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
